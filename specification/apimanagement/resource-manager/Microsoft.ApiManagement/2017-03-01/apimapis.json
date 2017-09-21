@@ -1660,11 +1660,13 @@
         },
         "isCurrent": {
           "type": "boolean",
-          "description": "Indicates if API revision is current api revision."
+          "description": "Indicates if API revision is current api revision.",
+          "readOnly": true
         },
         "isOnline": {
           "type": "boolean",
-          "description": "Indicates if API revision is accessible via the gateway."
+          "description": "Indicates if API revision is accessible via the gateway.",
+          "readOnly": true
         }
       },
       "description": "API base contract details."
@@ -1689,11 +1691,13 @@
       "properties": {
         "apiId": {
           "type":"string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Identifier of the API Revision."
         },
         "apiRevision": {
           "type":"string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Revision number of API."
         },
         "createdDateTime": {
           "type":"string",
@@ -1755,7 +1759,7 @@
       "properties": {
         "Id" : {
               "type": "string",
-              "description": "Identifier for existing API Version Set."
+              "description": "Identifier for existing API Version Set. Omit this value to create a new Version Set."
         },
         "description": {
           "type": "string",
