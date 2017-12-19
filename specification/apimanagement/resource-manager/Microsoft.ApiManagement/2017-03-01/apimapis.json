@@ -123,6 +123,13 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "includeApiVersionSet",
+            "in": "query",
+            "type": "boolean",
+            "required": false,
+            "default": false
           }
         ],
         "responses": {
@@ -1814,6 +1821,9 @@
             }
           },
           "description": "Describes on which protocols the operations in this API can be invoked."
+        },
+        "apiVersionSet" : {
+          "$ref" : "#/definitions/ApiVersionSetContract"
         }
       },
       "allOf": [
@@ -1921,6 +1931,10 @@
           "type": "boolean",
           "description": "Indicates if API revision is accessible via the gateway.",
           "readOnly": true
+        },
+        "apiVersionSetId": {
+          "type": "string",
+          "description": "A resource identifier for the related ApiVersionSet."
         }
       },
       "description": "API base contract details."
@@ -1988,10 +2002,12 @@
       }
     },
     "ApiRevisionInfoContract" : {
+        "type": "object",
+        "description": "Object used to create an API Revision or Version based on an existing API Revision",
         "properties": {
           "sourceApiId": {
             "type": "string",
-            "description": "Id of API to be used to create the revision from."
+            "description": "Resource identifier of API to be used to create the revision from."
           },
           "ApiVersionName": {
             "type": "string",
@@ -2004,6 +2020,9 @@
           "ApiRevisionDescription": {
             "type": "string",
             "description": "Description of new API Revision."
+          },
+          "apiVersionSet" : {
+            "$ref" : "#/definitions/ApiVersionSetContract"
           }
         }
     },
