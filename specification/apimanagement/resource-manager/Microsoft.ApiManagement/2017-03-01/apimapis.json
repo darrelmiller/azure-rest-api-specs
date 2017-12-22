@@ -74,6 +74,13 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "expandApiVersionSet",
+            "in": "query",
+            "type": "boolean",
+            "required": false,
+            "default": false
           }
         ],
         "responses": {
@@ -123,13 +130,6 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "includeApiVersionSet",
-            "in": "query",
-            "type": "boolean",
-            "required": false,
-            "default": false
           }
         ],
         "responses": {
