@@ -579,9 +579,6 @@
           "204": {
             "description": "The release was successfully deleted."
           },
-          "400": {
-            "description": "The release cannot be deleted."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
