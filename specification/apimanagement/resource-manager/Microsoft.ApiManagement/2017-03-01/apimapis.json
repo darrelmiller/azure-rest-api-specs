@@ -352,7 +352,7 @@
         "tags": [
           "Revisions"
         ],
-        "operationId": "Api_GetRevisions",
+        "operationId": "ApiRevisions_List",
         "description": "Lists all revisions of an API.",
         "parameters": [
           {
@@ -404,7 +404,7 @@
         "tags": [
           "Releases"
         ],
-        "operationId": "Api_GetReleases",
+        "operationId": "ApiRelease_List",
         "description": "Lists all releases of an API. An API release is created when making an API Revision current. Releases are also used to rollback to previous revisions. Results will be paged and can be constrained by the $top and $skip parameters.",
         "parameters": [
           {
@@ -473,7 +473,7 @@
         "tags": [
           "Releases"
         ],
-        "operationId": "Api_GetRelease",
+        "operationId": "ApiRelease_Get",
         "description": "Returns the details of an API release.",
         "responses": {
           "200": {
@@ -498,7 +498,7 @@
         "tags": [
           "Releases"
         ],
-        "operationId": "Api_CreateOrUpdateRelease",
+        "operationId": "ApiRelease_CreateOrUpdate",
         "description": "Creates a new Release for the API or updates an existing one.",
         "parameters": [
           {
@@ -1766,7 +1766,6 @@
           }
         },
         "wsdlSelector": {
-          "type": "object",
           "description": "Criteria to limit import of WSDL to a subset of the document.",
           "properties": {
             "wsdlServiceName": {
@@ -1922,6 +1921,11 @@
           "minLength": 1,
           "maxLength": 100
         },
+        "apiVersion": {
+          "type": "string",
+          "description": "Indicates the Version identifier of the API if the API is versioned",
+          "maxLength": 100
+        },
         "isCurrent": {
           "type": "boolean",
           "description": "Indicates if API revision is current api revision.",
@@ -1964,6 +1968,8 @@
         },
         "apiRevision": {
           "type":"string",
+          "minLength": 1,
+          "maxLength": 100,          
           "readOnly": true,
           "description": "Revision number of API."
         },
@@ -1971,17 +1977,18 @@
           "type":"string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The time the API Revision was created."
+          "description": "The time the API Revision was created. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
         },
         "updatedDateTime": {
           "type":"string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The time the API Revision were updated."
+          "description": "The time the API Revision were updated. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
         },
         "description": {
           "type": "string",
           "readOnly": true,
+          "maxLength": 256,
           "description": "Description of the API Revision."
         },
         "privateUrl": {
@@ -2002,7 +2009,6 @@
       }
     },
     "ApiRevisionInfoContract" : {
-        "type": "object",
         "description": "Object used to create an API Revision or Version based on an existing API Revision",
         "properties": {
           "sourceApiId": {
@@ -2011,14 +2017,12 @@
           },
           "ApiVersionName": {
             "type": "string",
+            "maxLength": 100,
             "description": "Version identifier for the new API Version."
-          },
-          "ApiVersionDescription": {
-            "type": "string",
-            "description": "Description of new API Version"
           },
           "ApiRevisionDescription": {
             "type": "string",
+            "maxLength": 256,
             "description": "Description of new API Revision."
           },
           "apiVersionSet" : {
@@ -2027,12 +2031,11 @@
         }
     },
     "ApiVersionSetContract" : {
-      "type": "object",
       "description": "An API Version Set contains the common configuration for a set of API Versions relating ",
       "properties": {
         "Id" : {
-              "type": "string",
-              "description": "Identifier for existing API Version Set. Omit this value to create a new Version Set."
+          "type": "string",
+          "description": "Identifier for existing API Version Set. Omit this value to create a new Version Set."
         },
         "description": {
           "type": "string",
@@ -2042,7 +2045,7 @@
           "type": "string",
           "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
           "enum": [
-            "Segment", "Query","Header"
+            "Segment", "Query", "Header"
           ]
         },
         "versionQueryName": {
@@ -2072,7 +2075,6 @@
       "description": "Paged Api Revision list representation."
     },
     "ApiReleaseContract": {
-      "type": "object",
       "description": "API Release details",
       "properties": {
         "id": {
@@ -2087,7 +2089,7 @@
           "type":"string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The time the API was released."        
+          "description": "The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."        
         },
         "updatedDate": {
           "type":"string",
